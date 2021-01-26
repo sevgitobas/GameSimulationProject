@@ -2,6 +2,7 @@
 using GameSimulationProject.Concrete;
 using GameSimulationProject.Entities;
 using System;
+using System.Collections.Generic;
 
 namespace GameSimulationProject
 {
@@ -9,6 +10,9 @@ namespace GameSimulationProject
     {
         static void Main(string[] args)
         {
+            string karsılama = "Oyun sistemine hoşgeldiniz!";
+            Console.WriteLine(karsılama);
+
             BasePlayerManager basePlayerManager = new PlayerManager();
             basePlayerManager.Add(new Player { Id = 1, FirstName = "Yıldız", LastName = "Yılmaz", 
                 DateofBirth = new DateTime(1990, 5, 20), TcNo = "12345678910"}); //ekleme
@@ -25,6 +29,16 @@ namespace GameSimulationProject
                 DateofBirth = new DateTime(1987, 1, 21),
                 TcNo = "165549820135"
             }); //güncelleme
+
+            Game game1 = new Game() { Id = 1, GameName = "Harry Potter", GameCategory = "Simülasyon", Price = 19.40 };
+            Game game2 = new Game() { Id = 2, GameName = "Mario", GameCategory = "Macera", Price = 25.90 };
+
+            List<Game> games = new List<Game> { game1, game2 };
+
+            ISellService sellService = new GameManager();
+            sellService.ListGame(games);
+            sellService.Calculate(games);
+
         }
     }
 }
