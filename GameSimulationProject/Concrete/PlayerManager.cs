@@ -6,18 +6,35 @@ using System.Text;
 
 namespace GameSimulationProject.Concrete
 {
-    public class PlayerManager : BasePlayerManager
+    public class PlayerManager : IPlayerService
     {
-        private Player player;
-        public virtual void Add()
+        IGamerValidationService _gamerValidationService;
+
+        public PlayerManager(IGamerValidationService gamerValidationService)
         {
-            CheckIfRealPerson(player);
-            Console.WriteLine("eklendi");
+            _gamerValidationService = gamerValidationService;
         }
 
-        private bool CheckIfRealPerson(Player player)
+        public void Add(Player player)
         {
-            return true;
+            if (_gamerValidationService.Validate(player)==true)
+            {
+                Console.WriteLine("Oyuncu eklendi : " + player.FirstName);
+            }
+            else
+            {
+                Console.WriteLine("Doğrulama başarısız. Kayıt yapılamadı.");
+            }
+        }
+
+        public void Delete(Player player)
+        {
+            Console.WriteLine("Oyuncu silindi : " + player.FirstName);
+        }
+
+        public void UpDate(Player player)
+        {
+            Console.WriteLine("Oyuncu güncellendi : " + player.FirstName);
         }
     }
 }

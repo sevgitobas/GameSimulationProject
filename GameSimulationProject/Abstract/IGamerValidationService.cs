@@ -5,10 +5,8 @@ using System.Text;
 
 namespace GameSimulationProject.Abstract
 {
-    public interface IPlayerService
+    public interface IGamerValidationService
     {
-        void Add(Player player);
-        void Delete(Player player);
-        void UpDate(Player player);
+        bool Validate(Player player);
     }
 }
